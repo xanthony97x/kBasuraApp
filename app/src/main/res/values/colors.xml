@@ -1,5 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Colores predeterminados -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#F5F5F5</color>
+    <color name="shadow">#B0B0B0</color>
+
+    <!-- Colores personalizados -->
+    <color name="green">#4CAF50</color> <!-- Verde para reciclables -->
+    <color name="dark_green">#388E3C</color> <!-- Verde oscuro para el botón cuando se presiona -->
+    <color name="red">#D32F2F</color> <!-- Rojo para desechos peligrosos -->
+    <color name="blue">#1976D2</color> <!-- Azul para vidrio -->
+    <color name="yellow">#FBC02D</color> <!-- Amarillo para plástico -->
+    <color name="brown">#795548</color> <!-- Marrón para orgánico -->
+    <color name="gray">#9E9E9E</color> <!-- Gris para metales -->
+    <color name="purple">#7B1FA2</color> <!-- Morado para papel -->
 </resources>

@@ -1,14 +1,15 @@
 package com.marcoescalera.kbasura
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
 import java.nio.ByteBuffer
@@ -28,6 +29,19 @@ class ResultActivity : AppCompatActivity() {
         // Inicializar las vistas
         imageView = findViewById(R.id.imageView)
         tvResult = findViewById(R.id.tv_result)
+
+        val btnRetry = findViewById<Button>(R.id.btn_retry)
+        btnRetry.setOnClickListener {
+            val intent = Intent(this, CaptureActivity::class.java) // Asegúrate de que CaptureActivity es la pantalla de captura
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP // Opcional: cierra ResultActivity al volver
+            startActivity(intent)
+            finish() // Cierra ResultActivity para evitar acumulación en la pila de actividades
+        }
+
+        val btnExit = findViewById<Button>(R.id.btn_exit)
+        btnExit.setOnClickListener {
+            exitApp()
+        }
 
         // Cargar el modelo TensorFlow Lite
         try {
@@ -57,7 +71,7 @@ class ResultActivity : AppCompatActivity() {
 
                     // Clasificar la imagen y mostrar el resultado
                     val result = classifyImage(bitmap)
-                    tvResult.text = "Resultado: $result"
+                    tvResult.text = "$result"
                 } else {
                     Toast.makeText(this, "No se pudo cargar la imagen", Toast.LENGTH_SHORT).show()
                 }
@@ -68,6 +82,10 @@ class ResultActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Ruta de la imagen no encontrada", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun exitApp() {
+        finishAffinity() // Cierra todas las actividades de la app
     }
 
     private fun loadModelFile(): MappedByteBuffer {
@@ -99,7 +117,7 @@ class ResultActivity : AppCompatActivity() {
         Log.d("ResultActivity", "Resultado del modelo: ${output[0].contentToString()}")
 
         // Obtener la categoría con la probabilidad más alta
-        val categories = listOf("desechos", "infeccioso_peligroso", "metal", "organico", "papel", "plastico", "vidrio")
+        val categories = listOf("DESECHOS", "INFECCIOSO - PELIGROSO", "METAL", "ORGANICO", "PAPEL", "PLASTICO", "VIDRIO")
         val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
 
         // Verificar que la clasificación esté bien
