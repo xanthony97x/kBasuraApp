@@ -84,11 +84,8 @@ class ResultActivity : AppCompatActivity() {
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
         val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
 
-        // Mostrar el ByteBuffer para depuración
-        Log.d("ResultActivity", "ByteBuffer: $byteBuffer")
-
         // Ejecutar el modelo
-        val output = Array(1) { FloatArray(7) } // Ajusta el tamaño a 7 (no 8)
+        val output = Array(1) { FloatArray(7) } // Salida del modelo con 7 categorías
         try {
             tflite.run(byteBuffer, output)
             Log.d("ResultActivity", "Modelo ejecutado correctamente.")
@@ -102,7 +99,7 @@ class ResultActivity : AppCompatActivity() {
         Log.d("ResultActivity", "Resultado del modelo: ${output[0].contentToString()}")
 
         // Obtener la categoría con la probabilidad más alta
-        val categories = listOf("vidrio", "plastico", "papel", "organico", "metal", "infeccioso_peligroso", "desechos")
+        val categories = listOf("desechos", "infeccioso_peligroso", "metal", "organico", "papel", "plastico", "vidrio")
         val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
 
         // Verificar que la clasificación esté bien
@@ -114,6 +111,7 @@ class ResultActivity : AppCompatActivity() {
             "Desconocido" // En caso de que el índice no sea válido
         }
     }
+
 
 
     private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
