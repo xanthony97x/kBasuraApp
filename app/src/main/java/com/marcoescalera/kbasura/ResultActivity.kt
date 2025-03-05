@@ -24,66 +24,51 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
-        // Cargar el modelo TensorFlow Lite
-        tflite = Interpreter(loadModelFile())
 
+        // Inicializar las vistas
         imageView = findViewById(R.id.imageView)
         tvResult = findViewById(R.id.tv_result)
 
-        // Recuperar la ruta de la imagen desde el Intent
-        val photoPath = intent.getStringExtra("photo_path")
+        // Cargar el modelo TensorFlow Lite
+        try {
+            tflite = Interpreter(loadModelFile())
+            Log.d("ResultActivity", "Modelo cargado correctamente.")
+        } catch (e: Exception) {
+            Log.e("ResultActivity", "Error al cargar el modelo", e)
+            Toast.makeText(this, "Error al cargar el modelo", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        if (photoPath != null) {
-            // Cargar la imagen desde la ruta y mostrarla en el ImageView
-            val bitmap = BitmapFactory.decodeFile(photoPath)
-            if (bitmap != null) {
-                imageView.setImageBitmap(bitmap)
+        // Recuperar la URI de la imagen desde el Intent
+        val photoUri = intent.getStringExtra("photo_uri")
+        Log.d("ResultActivity", "Ruta de la imagen recibida: $photoUri")
 
-                // Clasificar la imagen y mostrar el resultado
-                val result = classifyImage(bitmap)
-                when (result) {
-                    "vidrio" -> {
-                        tvResult.text = "Resultado: Vidrio ♻️"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    "plástico" -> {
-                        tvResult.text = "Resultado: Plástico ♻️"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    "papel" -> {
-                        tvResult.text = "Resultado: Papel ♻️"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    "orgánico" -> {
-                        tvResult.text = "Resultado: Orgánico 🍂"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    "metal" -> {
-                        tvResult.text = "Resultado: Metal ♻️"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    "infeccioso_peligroso" -> {
-                        tvResult.text = "Resultado: Infeccioso/Peligroso ☣️"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    "desechos" -> {
-                        tvResult.text = "Resultado: Desechos 🗑️"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
-                    else -> {
-                        tvResult.text = "Resultado: Desconocido ❓"
-                        tvResult.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    }
+        if (photoUri != null) {
+            try {
+                // Abrir la imagen desde la URI
+                val inputStream = contentResolver.openInputStream(android.net.Uri.parse(photoUri))
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+
+                if (bitmap != null) {
+                    Log.d("ResultActivity", "Imagen cargada correctamente.")
+
+                    // Mostrar la imagen en el ImageView
+                    imageView.setImageBitmap(bitmap)
+
+                    // Clasificar la imagen y mostrar el resultado
+                    val result = classifyImage(bitmap)
+                    tvResult.text = "Resultado: $result"
+                } else {
+                    Toast.makeText(this, "No se pudo cargar la imagen", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "No se pudo cargar la imagen", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Log.e("ResultActivity", "Error al cargar la imagen", e)
+                Toast.makeText(this, "Error al cargar la imagen", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(this, "Ruta de la imagen no encontrada", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
     private fun loadModelFile(): MappedByteBuffer {
         val fileDescriptor = assets.openFd("MNV2.tflite")
@@ -99,13 +84,29 @@ class ResultActivity : AppCompatActivity() {
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
         val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
 
+        // Mostrar el ByteBuffer para depuración
+        Log.d("ResultActivity", "ByteBuffer: $byteBuffer")
+
         // Ejecutar el modelo
-        val output = Array(1) { FloatArray(8) } // Ajusta el tamaño según tu modelo
-        tflite.run(byteBuffer, output)
+        val output = Array(1) { FloatArray(7) } // Ajusta el tamaño a 7 (no 8)
+        try {
+            tflite.run(byteBuffer, output)
+            Log.d("ResultActivity", "Modelo ejecutado correctamente.")
+        } catch (e: Exception) {
+            Log.e("ResultActivity", "Error al ejecutar el modelo", e)
+            Toast.makeText(this, "Error al ejecutar el modelo", Toast.LENGTH_SHORT).show()
+            return "Error en la clasificación"
+        }
+
+        // Mostrar la salida del modelo para depuración
+        Log.d("ResultActivity", "Resultado del modelo: ${output[0].contentToString()}")
 
         // Obtener la categoría con la probabilidad más alta
         val categories = listOf("vidrio", "plastico", "papel", "organico", "metal", "infeccioso_peligroso", "desechos")
         val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
+
+        // Verificar que la clasificación esté bien
+        Log.d("ResultActivity", "Índice con mayor probabilidad: $maxIndex")
 
         return if (maxIndex in categories.indices) {
             categories[maxIndex] // Devuelve la categoría correspondiente
@@ -113,6 +114,7 @@ class ResultActivity : AppCompatActivity() {
             "Desconocido" // En caso de que el índice no sea válido
         }
     }
+
 
     private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
         val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3) // Ajusta según tu modelo
