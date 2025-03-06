@@ -1,50 +1,59 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:background="@drawable/background_gradient"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/background_gradient">
-
-    <!-- Título -->
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resultado de Clasificación"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"/>
+    android:padding="20dp">
 
     <!-- Imagen con bordes redondeados -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:background="@drawable/rounded_corner"
         android:clipToOutline="true"
-        android:contentDescription="Imagen capturada" />
-
+        android:contentDescription="Imagen capturada"
+        android:scaleType="centerCrop" />
 
     <!-- Resultado de la clasificación -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="Resultado de Clasificación:"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Procesando..."
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/result_background"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Procesando..."
         android:textColor="@color/white"
-        android:elevation="4dp"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iconView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_background"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_default" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -61,6 +70,15 @@
             android:padding="10dp"
             android:text="NUEVO"
             android:textColor="@android:color/white" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="?android:attr/listDivider" />
 
         <Button
             android:id="@+id/btn_exit"

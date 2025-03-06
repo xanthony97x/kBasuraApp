@@ -1,9 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Kbasura" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema principal de la app -->
+    <style name="Theme.Kbasura" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Colores principales -->
+        <item name="colorPrimary">#4A90E2</item> <!-- Azul claro -->
+        <item name="colorPrimaryVariant">#357ABD</item> <!-- Azul más oscuro -->
+        <item name="colorSecondary">#F5A623</item> <!-- Naranja para contrastar -->
+
+        <!-- Fondo y contenido -->
+        <item name="android:colorBackground">#F5F5F5</item> <!-- Fondo gris claro -->
+        <item name="android:textColorPrimary">#212121</item> <!-- Texto principal negro -->
+        <item name="android:textColorSecondary">#757575</item> <!-- Texto secundario gris -->
+
+        <!-- Barra de estado -->
+        <item name="android:statusBarColor">#357ABD</item> <!-- Azul oscuro -->
+        <item name="android:navigationBarColor">#000000</item> <!-- Barra de navegación blanca -->
+
+        <!-- Botones y componentes -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texto en botones principales blanco -->
+        <item name="colorOnSecondary">#FFFFFF</item> <!-- Texto en botones secundarios blanco -->
+
+        <!-- Personalización de botones -->
+        <item name="buttonStyle">@style/Widget.MyApp.Button</item>
     </style>
 
-    <style name="Theme.Kbasura" parent="Base.Theme.Kbasura" />
+    <!-- Estilo para botones -->
+    <style name="Widget.MyApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">#4A90E2</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>
