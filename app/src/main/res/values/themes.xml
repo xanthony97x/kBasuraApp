@@ -16,17 +16,14 @@
         <item name="android:statusBarColor">#357ABD</item> <!-- Azul oscuro -->
         <item name="android:navigationBarColor">#000000</item> <!-- Barra de navegación blanca -->
 
-        <!-- Botones y componentes -->
-        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texto en botones principales blanco -->
-        <item name="colorOnSecondary">#FFFFFF</item> <!-- Texto en botones secundarios blanco -->
-
         <!-- Personalización de botones -->
-        <item name="buttonStyle">@style/Widget.MyApp.Button</item>
+        <item name="buttonStyle">@style/Widget.Button</item>
     </style>
 
     <!-- Estilo para botones -->
-    <style name="Widget.MyApp.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">#4A90E2</item>
-        <item name="android:textColor">#FFFFFF</item>
+    <style name="Widget.Button" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">#FFFFFF</item> <!-- Azul claro -->
+        <item name="colorPrimaryVariant">#357ABD</item> <!-- Azul más oscuro -->
+        <item name="colorSecondary">#F5A623</item> <!-- Naranja para contrastar -->
     </style>
 </resources>

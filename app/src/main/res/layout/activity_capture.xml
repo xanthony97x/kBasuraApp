@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,13 +9,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <!-- Cuadro de enfoque -->
+    <View
+        android:id="@+id/focus_box"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/focus_box"/>
+
+    <!-- Botón de captura con ícono -->
     <Button
+        android:theme="@style/Widget.Button"
         android:id="@+id/btn_take_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tomar Foto"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text=""
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/round_button">
+    </Button>
 
 </RelativeLayout>
