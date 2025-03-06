@@ -3,5 +3,5 @@
     <corners android:radius="20dp"/>
     <solid android:color="@color/white"/>
     <padding android:left="8dp" android:top="8dp" android:right="8dp" android:bottom="8dp"/>
-    <shadowColor android:color="@color/shadow"/>
+    <shadowColor android:color="@color/black"/>
 </shape>

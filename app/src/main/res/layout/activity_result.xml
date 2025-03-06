@@ -5,7 +5,7 @@
     android:padding="20dp"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/light_gray">
+    android:background="@drawable/background_gradient">
 
     <!-- Título -->
     <TextView
@@ -25,9 +25,11 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
-        android:background="@drawable/rounded_background"
-        android:elevation="6dp"
-        android:transitionName="image_transition"/>
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_corner"
+        android:clipToOutline="true"
+        android:contentDescription="Imagen capturada" />
+
 
     <!-- Resultado de la clasificación -->
     <TextView
@@ -57,7 +59,7 @@
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/blue"
             android:padding="10dp"
-            android:text="Tomar otra foto"
+            android:text="NUEVO"
             android:textColor="@android:color/white" />
 
         <Button
@@ -66,7 +68,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"
             android:padding="10dp"
-            android:text="Salir"
+            android:text="SALIR"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>
