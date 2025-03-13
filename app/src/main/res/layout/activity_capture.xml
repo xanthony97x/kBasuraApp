@@ -10,6 +10,17 @@
         android:layout_height="match_parent"/>
 
     <!-- Cuadro de enfoque -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="ENFQUE EL OBJETO"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        android:textSize="15sp">
+
+    </TextView>
+
     <View
         android:id="@+id/focus_box"
         android:layout_width="300dp"
