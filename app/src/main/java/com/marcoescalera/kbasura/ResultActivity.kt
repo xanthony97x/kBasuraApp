@@ -29,10 +29,9 @@ class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
 
-        // Inicializar las vistas
         imageView = findViewById(R.id.imageView)
         tvResult = findViewById(R.id.tv_result)
-        iconView = findViewById(R.id.iconView) // Nuevo ImageView agregado en el XML
+        iconView = findViewById(R.id.iconView)
 
         val btnRetry = findViewById<Button>(R.id.btn_retry)
         btnRetry.setOnClickListener {
@@ -47,17 +46,14 @@ class ResultActivity : AppCompatActivity() {
             exitApp()
         }
 
-        // Cargar el modelo TensorFlow Lite
         try {
             tflite = Interpreter(loadModelFile())
             Log.d("ResultActivity", "Modelo cargado correctamente.")
         } catch (e: Exception) {
             Log.e("ResultActivity", "Error al cargar el modelo", e)
-            Toast.makeText(this, "Error al cargar el modelo", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Recuperar la URI de la imagen desde el Intent
         val photoUri = intent.getStringExtra("photo_uri")
         Log.d("ResultActivity", "Ruta de la imagen recibida: $photoUri")
 
@@ -70,7 +66,6 @@ class ResultActivity : AppCompatActivity() {
                     Log.d("ResultActivity", "Imagen cargada correctamente.")
                     imageView.setImageBitmap(bitmap)
 
-                    // Clasificar la imagen y actualizar UI
                     val result = classifyImage(bitmap)
                     updateUI(result)
                 } else {
@@ -129,11 +124,10 @@ class ResultActivity : AppCompatActivity() {
             Log.d("ResultActivity", "Modelo ejecutado correctamente.")
         } catch (e: Exception) {
             Log.e("ResultActivity", "Error al ejecutar el modelo", e)
-            Toast.makeText(this, "Error al ejecutar el modelo", Toast.LENGTH_SHORT).show()
             return "Error en la clasificación"
         }
 
-        val categories = listOf("DESECHOS", "INFECCIOSO - PELIGROSO", "METAL", "ORGANICO", "PAPEL", "PLASTICO", "VIDRIO")
+        val categories = listOf("DESECHOS", "INFECCIOSO_PELIGROSO", "METAL", "ORGANICO", "PAPEL", "PLASTICO", "VIDRIO")
         val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
 
         Log.d("ResultActivity", "Índice con mayor probabilidad: $maxIndex")

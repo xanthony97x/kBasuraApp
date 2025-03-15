@@ -18,24 +18,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Verificar permisos de la cámara antes de iniciar la actividad de captura
         Handler(Looper.getMainLooper()).postDelayed({
             checkCameraPermission()
-        }, 3000) // Espera 3 segundos antes de continuar
+        }, 3000)
     }
 
     private fun checkCameraPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
-        } else {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             openCaptureActivity()
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
         }
     }
 
     private fun openCaptureActivity() {
         val intent = Intent(this, CaptureActivity::class.java)
         startActivity(intent)
-        finish() // Cierra MainActivity para que no vuelva atrás
+        finish()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -44,7 +43,8 @@ class MainActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openCaptureActivity()
             } else {
-                Toast.makeText(this, "Se necesita acceso a la cámara para usar esta función", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Otorgue el permiso para usar la App", Toast.LENGTH_SHORT).show()
+                finishAffinity()
             }
         }
     }

@@ -24,7 +24,6 @@ class CaptureActivity : AppCompatActivity() {
     private lateinit var previewView: PreviewView
     private lateinit var imageCapture: ImageCapture
 
-    // Solicitud de permisos con Activity Result API (Recomendado)
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -42,7 +41,6 @@ class CaptureActivity : AppCompatActivity() {
         previewView = findViewById(R.id.previewView)
         val btnTakePhoto = findViewById<Button>(R.id.btn_take_photo)
 
-        // Verificar y solicitar permiso de cámara
         checkCameraPermission()
 
         btnTakePhoto.setOnClickListener {
@@ -99,13 +97,11 @@ class CaptureActivity : AppCompatActivity() {
         imageCapture.takePicture(
             outputOptions, ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    Toast.makeText(this@CaptureActivity, "Imagen guardada en galería", Toast.LENGTH_SHORT).show()
                     openResultActivity(output.savedUri.toString())
                 }
 
                 override fun onError(exc: ImageCaptureException) {
                     Log.e("CameraX", "Error al capturar la foto: ${exc.message}", exc)
-                    Toast.makeText(this@CaptureActivity, "Error al capturar la foto", Toast.LENGTH_SHORT).show()
                 }
             })
     }
