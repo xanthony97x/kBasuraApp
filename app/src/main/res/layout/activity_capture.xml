@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="ENFQUE EL OBJETO"
+        android:text="ENFOQUE EL OBJETO"
         android:textColor="@color/white"
         android:textStyle="italic"
         android:textSize="15sp">
