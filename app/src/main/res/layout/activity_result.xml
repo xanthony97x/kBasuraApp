@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <!-- Imagen con bordes redondeados -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="270dp"
@@ -17,7 +16,6 @@
         android:contentDescription="Imagen capturada"
         android:scaleType="centerCrop" />
 
-    <!-- Resultado de la clasificación -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -62,8 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp">
-
-        <!-- Botón para volver a tomar una foto -->
+        
         <Button
             android:id="@+id/btn_retry"
             android:layout_width="wrap_content"
