@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openCaptureActivity() {
-        val intent = Intent(this, CaptureActivity::class.java)
+        val intent = Intent(this, InformationActivity::class.java)
         startActivity(intent)
         finish()
     }
