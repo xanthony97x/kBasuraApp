@@ -15,6 +15,7 @@ class WasteAdapter(private val items: List<WasteItem>) :
         val cardView: CardView = view.findViewById(R.id.card_view)
         val imageView: ImageView = view.findViewById(R.id.image_view)
         val textView: TextView = view.findViewById(R.id.text_view)
+        val textExamples: TextView = view.findViewById(R.id.text_examples) // 🆕 línea para los ejemplos
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WasteViewHolder {
@@ -27,6 +28,7 @@ class WasteAdapter(private val items: List<WasteItem>) :
         val item = items[position]
         holder.imageView.setImageResource(item.imageResId)
         holder.textView.text = item.name
+        holder.textExamples.text = "Ej: ${item.examples}" // 🆕 mostrar ejemplos
     }
 
     override fun getItemCount(): Int = items.size

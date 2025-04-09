@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
 
     <!-- Título -->
     <TextView
@@ -12,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DESECHOS URBANOS"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +36,13 @@
     <!-- Botón para ir a CaptureActivity -->
     <Button
         android:id="@+id/btn_next"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/green"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:textColorHint="@color/black"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CONTINUAR"

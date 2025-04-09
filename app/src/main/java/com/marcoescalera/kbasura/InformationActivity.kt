@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class InformationActivity : AppCompatActivity() {
 
     private val items = listOf(
-        WasteItem("PAPEL", R.drawable.ic_papel),
-        WasteItem("METAL", R.drawable.ic_manico),
-        WasteItem("VIRIO", R.drawable.ic_jallo),
-        WasteItem("PLASTICO", R.drawable.ic_vidio),
-        WasteItem("ORGANICO", R.drawable.ic_detal),
-        WasteItem("DESECHOS", R.drawable.ic_odesechos),
-        WasteItem("VACIO", R.drawable.ic_inliodchos),
-        WasteItem("INFECCIOSO_PELIGROSO", R.drawable.ic_infeccioso),
-        WasteItem("VACIO", R.drawable.ic_peligroso)
+        WasteItem("PAPEL", R.drawable.icc_papel, "Cajas de cartón, sobres, papel reciclado."),
+        WasteItem("METAL", R.drawable.icc_metal, "Latas de conserva, aluminio, alambres."),
+        WasteItem("VIDRIO", R.drawable.icc_vidrio, "Botellas, frascos, vasos, restos de ventanas."),
+        WasteItem("PLASTICO", R.drawable.icc_plastico, "Bolsas plásticas, envoltorios, tapas."),
+        WasteItem("ORGANICO", R.drawable.icc_organico, "Restos de fruta/verduras, restos de jardín."),
+        WasteItem("DESECHOS", R.drawable.icc_desechos, "Colillas de cigarros, llantas, trapos viejos."),
+        WasteItem("INFECCIOSO_PELIGROSO", R.drawable.icc_infeccioso_peligroso, "Jeringas, gasas, guantes médicos, barbijos.")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +25,7 @@ class InformationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_information)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = WasteAdapter(items)
 
         val nextButton: Button = findViewById(R.id.btn_next)
