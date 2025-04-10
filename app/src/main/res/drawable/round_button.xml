@@ -1,11 +1,10 @@
-<!-- res/drawable/round_button.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="#FFFFFF"/> <!-- Color de fondo del botón -->
+    <solid android:color="#FFFFFF"/>
     <stroke
         android:width="2dp"
-        android:color="#CCCCCC"/> <!-- Color del anillo (gris oscuro) -->
+        android:color="#CCCCCC"/>
     <size
         android:width="60dp"
-        android:height="60dp"/> <!-- Tamaño del botón -->
+        android:height="60dp"/>
 </shape>

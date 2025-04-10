@@ -4,20 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class InformationActivity : AppCompatActivity() {
 
     private val items = listOf(
-        WasteItem("PAPEL", R.drawable.icc_papel, "Cajas de cartón, sobres, papel reciclado."),
-        WasteItem("METAL", R.drawable.icc_metal, "Latas de conserva, aluminio, alambres."),
-        WasteItem("VIDRIO", R.drawable.icc_vidrio, "Botellas, frascos, vasos, restos de ventanas."),
-        WasteItem("PLASTICO", R.drawable.icc_plastico, "Bolsas plásticas, envoltorios, tapas."),
-        WasteItem("ORGANICO", R.drawable.icc_organico, "Restos de fruta/verduras, restos de jardín."),
-        WasteItem("DESECHOS", R.drawable.icc_desechos, "Colillas de cigarros, llantas, trapos viejos."),
-        WasteItem("INFECCIOSO_PELIGROSO", R.drawable.icc_infeccioso_peligroso, "Jeringas, gasas, guantes médicos, barbijos.")
+        WasteItem("PAPEL", R.drawable.icc_papel, "Cartón, sobres, periódicos, bolsas de papel."),
+        WasteItem("METAL", R.drawable.icc_metal, "Latas, envases de conserva, aluminio, alambres."),
+        WasteItem("VIDRIO", R.drawable.icc_vidrio, "Botellas, frascos, vasos, copas."),
+        WasteItem("PLASTICO", R.drawable.icc_plastico, "Bolsas plásticas, botellas, envases plásticos."),
+        WasteItem("ORGANICO", R.drawable.icc_organico, "Restos de frutas/verduras, restos de jardín."),
+        WasteItem("DESECHOS", R.drawable.icc_desechos, "Colillas de cigarrillos, envolturas contaminadas, trapos."),
+        WasteItem("INFECCIOSO_PELIGROSO", R.drawable.icc_infeccioso_peligroso, "Jeringas, gasas, barbijos, pilas/baterías.")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

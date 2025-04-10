@@ -7,39 +7,53 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
-    <!-- Cuadro de enfoque -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="ENFOQUE EL OBJETO"
+        android:text="ENFOQUE UN OBJETO"
         android:textColor="@color/white"
         android:textStyle="italic"
-        android:textSize="15sp">
-
-    </TextView>
+        android:textSize="15sp" />
 
     <View
         android:id="@+id/focus_box"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/focus_box"/>
+        android:background="@drawable/focus_box" />
 
-    <!-- Botón de captura con ícono -->
-    <Button
-        android:theme="@style/Widget.Button"
-        android:id="@+id/btn_take_photo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text=""
+    <LinearLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/round_button">
-    </Button>
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp"
+        android:background="#000000">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FOTO"
+            android:textStyle="bold|normal"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:theme="@style/Widget.Button"
+            android:id="@+id/btn_take_photo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text=""
+            android:backgroundTint="@color/white"
+            android:background="@drawable/round_button"
+            android:padding="10dp"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -16,7 +16,6 @@
         android:gravity="center_vertical"
         android:padding="12dp">
 
-        <!-- Ícono a la izquierda -->
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="50dp"
@@ -24,14 +23,12 @@
             android:layout_marginEnd="15dp"
             android:contentDescription="@string/app_name" />
 
-        <!-- Contenedor para los textos -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- Nombre de la categoría -->
             <TextView
                 android:id="@+id/text_view"
                 android:layout_width="wrap_content"
@@ -40,7 +37,6 @@
                 android:textStyle="bold"
                 android:text="Nombre de categoría" />
 
-            <!-- Ejemplos de desechos -->
             <TextView
                 android:id="@+id/text_examples"
                 android:layout_width="wrap_content"
@@ -48,7 +44,6 @@
                 android:textSize="12sp"
                 android:textColor="#666"
                 android:text="Ejemplo: cajas, sobres, papel reciclado" />
-
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
