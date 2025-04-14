@@ -43,7 +43,7 @@
         android:paddingBottom="15dp"
         android:text="ANALIZANDO..."
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="27sp"
         android:textStyle="bold" />
 
     <ImageView
