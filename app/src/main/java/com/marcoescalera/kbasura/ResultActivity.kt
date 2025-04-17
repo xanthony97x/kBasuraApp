@@ -60,13 +60,18 @@ class ResultActivity : AppCompatActivity() {
         if (photoUri != null) {
             try {
                 val inputStream = contentResolver.openInputStream(android.net.Uri.parse(photoUri))
-                val bitmap = BitmapFactory.decodeStream(inputStream)
+                val originalBitmap = BitmapFactory.decodeStream(inputStream)
 
-                if (bitmap != null) {
+                if (originalBitmap != null) {
                     Log.d("ResultActivity", "Imagen cargada correctamente.")
-                    imageView.setImageBitmap(bitmap)
 
-                    val result = classifyImage(bitmap)
+                    // Mostrar la imagen original en el ImageView
+                    imageView.setImageBitmap(originalBitmap)
+
+                    // Procesar la imagen para el modelo: recorte central + redimensionado
+                    val processedBitmap = prepareImageForModel(originalBitmap)
+                    //imageView.setImageBitmap(processedBitmap)
+                    val result = classifyImage(processedBitmap)
                     updateUI(result)
                 } else {
                     Toast.makeText(this, "No se pudo cargar la imagen", Toast.LENGTH_SHORT).show()
@@ -78,6 +83,21 @@ class ResultActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Ruta de la imagen no encontrada", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun prepareImageForModel(bitmap: Bitmap): Bitmap {
+        // 1. Recortar cuadrado central
+        val croppedBitmap = cropToSquare(bitmap)
+        // 2. Redimensionar a 224x224
+        return Bitmap.createScaledBitmap(croppedBitmap, 224, 224, true)
+    }
+
+    private fun cropToSquare(bitmap: Bitmap): Bitmap {
+        val size = minOf(bitmap.width, bitmap.height) // Tamaño del lado más corto
+        val x = (bitmap.width - size) / 2 // Punto de inicio X (centrado)
+        val y = (bitmap.height - size) / 2 // Punto de inicio Y (centrado)
+
+        return Bitmap.createBitmap(bitmap, x, y, size, size)
     }
 
     private fun updateUI(result: String) {
@@ -114,9 +134,8 @@ class ResultActivity : AppCompatActivity() {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    private fun classifyImage(bitmap: Bitmap): String {
-        val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-        val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
+    private fun classifyImage(processedBitmap: Bitmap): String {
+        val byteBuffer = convertBitmapToByteBuffer(processedBitmap)
 
         val output = Array(1) { FloatArray(7) }
         try {
